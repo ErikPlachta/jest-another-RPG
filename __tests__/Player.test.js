@@ -5,6 +5,8 @@ jest.mock('../lib/Potion');
 const Player = require('../lib/Player');
 
 
+
+//- Can create a player?
 test('creates a player object', () => {
     const player = new Player('Dave');
   
@@ -18,9 +20,9 @@ test('creates a player object', () => {
     );
   });
   
-
-
-  //Here, we're checking that player.getStats() returns an object with four specific properties
+  
+  //-- Does player have all available stats
+    //Here, we're checking that player.getStats() returns an object with four specific properties
   test("gets player's stats as an object", () => {
     const player = new Player('Dave');
   
@@ -31,6 +33,8 @@ test('creates a player object', () => {
   });
 
   
+
+  //-- Inventory empty or not
   test('gets inventory from player or returns false', () => {
     const player = new Player('Dave');
   
@@ -39,5 +43,41 @@ test('creates a player object', () => {
     player.inventory = [];
   
     expect(player.getInventory()).toEqual(false);
+  });
+
+  
+  //-- Health
+  test("gets player's health value", () => {
+    const player = new Player('Dave');
+  
+    expect(player.getHealth()).toEqual(expect.stringContaining(player.health.toString()));
+});
+
+
+//-- Is player alive, or??..
+
+test('checks if player is alive or not', () => {
+    const player = new Player('Dave');
+  
+    expect(player.isAlive()).toBeTruthy();
+  
+    player.health = 0;
+  
+    expect(player.isAlive()).toBeFalsy();
+  });
+
+
+//-- reduce health testing. 
+test("subtracts from player's health", () => {
+    const player = new Player('Dave');
+    const oldHealth = player.health;
+  
+    player.reduceHealth(5);
+  
+    expect(player.health).toBe(oldHealth - 5);
+  
+    player.reduceHealth(99999);
+  
+    expect(player.health).toBe(0);
   });
   
