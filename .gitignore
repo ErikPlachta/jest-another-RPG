@@ -1,3 +1,6 @@
 
 _ARCHIVE
 *.code-workspace
+.DS_Store
+desktop.ini
+node_modules
